@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View User</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #171616 !important;
+        color: #fff !important;
+        overflow-x: hidden;
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        max-width: 800px;
+        margin: 2rem auto;
+        background-color: #292828;
+        padding: 1.5rem;
+        border-radius: 1rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      .profile-header {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+      .profile-header img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 4px solid #e80e0e;
+        margin-bottom: 1rem;
+      }
+      .profile-header h2 {
+        font-size: 1.8rem;
+        margin: 0.5rem 0;
+      }
+      .profile-header p {
+        font-size: 1rem;
+        color: #bbb;
+      }
+      .details {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+      .detail {
+        padding: 0.5rem 0.8rem;
+        background-color: #171616;
+        border: 1px solid #3c3c3c;
+        border-radius: 0.8rem;
+      }
+      .detail span {
+        display: block;
+        font-size: 0.9rem;
+        color: #bbb;
+        margin-bottom: 0.3rem;
+      }
+      .detail b {
+        font-size: 1.1rem;
+      }
+      .back-button {
+        display: block;
+        margin: 2rem auto 0;
+        text-align: center;
+        background-color: #e80e0e;
+        color: #fff;
+        text-decoration: none;
+        padding: 0.8rem 1.5rem;
+        border-radius: 1.2rem;
+        text-decoration: none;
+        width: 200px;
+        font-size: 1rem;
+      }
+      .back-button:hover {
+        text-decoration: none;
+        background-color: #ad0303;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include("navbar.ejs") %>
+    <div class="container">
+      <div class="profile-header">
+        <img src="<%= post.userImage %>" alt="Profile Image" />
+        <h2><%= post.username %></h2>
+        <p><%= post.gender %></p>
+      </div>
+      <div class="details">
+        <div class="detail">
+          <span>Street</span>
+          <b><%= post.streetNumber %>, <%= post.streetName %></b>
+        </div>
+        <div class="detail">
+          <span>City</span>
+          <b><%= post.city %></b>
+        </div>
+        <div class="detail">
+          <span>State</span>
+          <b><%= post.state %></b>
+        </div>
+        <div class="detail">
+          <span>Country</span>
+          <b><%= post.country %></b>
+        </div>
+        <div class="detail">
+          <span>Email</span>
+          <b><%= post.email %></b>
+        </div>
+        <div class="detail">
+          <span>Date of Birth</span>
+          <b><%= post.dob%></b>
+        </div>
+        <div class="detail">
+          <span>Phone</span>
+          <b><%= post.phone %></b>
+        </div>
+      </div>
+      <a href="http://localhost:3000/posts" class="back-button">Back to Home</a>
+    </div>
+  </body>
+</html>

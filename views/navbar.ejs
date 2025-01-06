@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Black Themed Navbar</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        overflow-x: hidden;
+      }
+
+      .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        height: 3.5rem;
+        background-color: #292828 !important;
+        padding: 0.5rem 3rem;
+        color: #fff;
+      }
+
+      .navbar div {
+        margin-right: 1.5rem;
+      }
+
+      .navbar .brand {
+        display: flex;
+        align-items: center;
+        color: red;
+        margin-left: 1.5rem;
+        width: 7.5rem;
+      }
+
+      .navbar .brand span {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+
+      .navbar .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 1.8rem;
+      }
+
+      .navbar .nav-links a {
+        padding-right: 4px;
+        margin: 2px;
+      }
+
+      .search {
+        padding: 0.6rem 0.4rem 0.6rem 0.4rem;
+        margin: 0.6rem 0 0.6rem 0;
+        font-size: 1rem;
+        border-radius: 5px;
+        color: #fff;
+        background-color: #080808;
+        border: 1px solid #848282;
+      }
+
+      .navbar .nav-links a {
+        padding: 0.7rem 0 0.7rem 0;
+        text-decoration: none;
+        color: #fff;
+        font-size: 1.5rem;
+        transition: color 0.3s;
+      }
+
+      .navbar .nav-links a:hover {
+        color: #e84023;
+      }
+
+      .quesBtn {
+        padding: 0 0.4rem 0 0.4rem;
+        background-color: #e84023;
+        color: #fff;
+        font-size: 0.9rem;
+        border: none;
+        border-radius: 1.5rem;
+      }
+
+      .right-menu {
+        display: flex;
+        padding: 0.5rem;
+        margin-left: 0.8rem;
+      }
+
+      .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+      }
+
+      #navbarNavAltMarkup {
+        margin-left: auto;
+        margin-right: initial;
+        justify-content: center;
+      }
+      @media (max-width: 770px) {
+        .navbar-collapse {
+          background-color: #080808;
+          border-radius: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md bg-light border-bottom sticky-top">
+      <div class="container-fluid" style="display: flex; align-items: center">
+        <div class="brand" style="margin-left: 2rem">
+          <img src="/images/quora_new.svg" alt="quora" />
+        </div>
+        <button
+          class="navbar-toggler"
+          id="navbar-toggler"
+          type="button"
+          style="color: #fff"
+          data-toggle="collapse"
+          data-target="#navbarNavAltMarkup"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div style="display: flex">
+            <div class="nav-links">
+              <a href="#"><i class="fa-solid fa-house"></i></a>
+              <a href="#"><i class="fa-solid fa-list"></i></a>
+              <a href="#"><i class="fa-solid fa-people-group"></i></a>
+              <a href="#"><i class="fa-solid fa-bell"></i></a>
+            </div>
+            <input class="search" type="text" placeholder="Search Quora" />
+
+            <div class="right-menu">
+              <i
+                class="fa-regular fa-user"
+                style="
+                  display: flex;
+                  align-items: center;
+                  margin-right: 0.5rem;
+                  padding: 0.5rem;
+                "
+              ></i>
+              <button class="quesBtn">Ask questions</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </body>
+</html>

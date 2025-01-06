@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>View Post</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #121212 !important;
+        color: #ffffff !important;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+      }
+
+      .row {
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .col-8 {
+        background-color: #1e1e1e;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        padding: 20px 30px;
+        border-radius: 8px;
+        width: 66.666%;
+        max-width: 600px; /* Ensure it doesn't get too wide on large screens */
+      }
+
+      h1 {
+        margin-bottom: 20px;
+        font-size: 28px;
+        font-weight: bold;
+        color: #ffffff;
+        text-align: center;
+      }
+
+      h3 {
+        margin: 10px 0;
+        font-size: 18px;
+        font-weight: normal;
+        color: #cccccc;
+      }
+
+      .post-details {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include("navbar.ejs") %>
+    <div class="container">
+      <div class="row mt-2 mb-2">
+        <div class="col-8">
+          <h1>Post Details</h1>
+          <div class="post-details">
+            <h5>Id: <%= post.id %></h5>
+            <h5>By <i><%= post.username %></i></h5>
+            <p>Description: <%= post.description %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
