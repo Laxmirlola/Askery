@@ -10,7 +10,8 @@ This project is a **Quora-like website** named **Askery** where users can:
 ### 1. **Core Functionalities**  
 - **Post Questions**: Users can ask questions or share thoughts on any topic.  
 - **Edit Posts**: Easily modify the content of your own posts.  
-- **Delete Posts**: Remove your posts at any time, even if posted anonymously.  
+- **Delete Posts**: Remove your posts at any time, even if posted anonymously.
+- **View Profile**: View anyone's profile information.  
 
 ### 2. **Anonymous Posting**  
 - Post questions or thoughts anonymously without revealing your identity.  
@@ -40,15 +41,22 @@ This project is a **Quora-like website** named **Askery** where users can:
 ### Prerequisites  
 - **Node.js**: Ensure Node.js is installed on your system.  
 
+### Demo
+
+
+https://github.com/user-attachments/assets/27c9aab3-054d-4b2e-bab4-0b30b4e57ab6
+
+
+
 ### Steps  
 1. **Clone the Repository**:  
    ```bash  
-   git clone https://github.com/username/quora-like-website.git  
+   git clone https://github.com/Laxmirlola/Askery.git  
    ```  
 
 2. **Navigate to the Project Directory**:  
    ```bash  
-   cd quora-like-website  
+   cd Askery  
    ```  
 
 3. **Install Dependencies**:  
@@ -68,7 +76,7 @@ This project is a **Quora-like website** named **Askery** where users can:
    ```  
 
 6. **Access the Website**:  
-   Open your browser and navigate to `http://localhost:3000`.  
+   Open your browser and navigate to `http://localhost:3000/posts`.  
 
 ## How It Works  
 
@@ -86,7 +94,6 @@ This project is a **Quora-like website** named **Askery** where users can:
 
 ## Acknowledgments  
 
-- Inspired by Quora's design and functionality.  
-- Built using the MERN stack with a focus on user experience.  
+- Inspired by Quora's design and functionality. 
 
 Enjoy exploring and customizing this **Askery**! 😊
