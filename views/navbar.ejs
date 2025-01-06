@@ -40,6 +40,7 @@
         color: red;
         margin-left: 1.5rem;
         width: 7.5rem;
+        cursor: pointer;
       }
 
       .navbar .brand span {
@@ -115,9 +116,11 @@
   <body>
     <nav class="navbar navbar-expand-md bg-light border-bottom sticky-top">
       <div class="container-fluid" style="display: flex; align-items: center">
-        <div class="brand" style="margin-left: 2rem">
-          <img src="/images/quora_new.svg" alt="quora" />
-        </div>
+        <a href="/posts">
+          <div class="brand" style="margin-left: 2rem">
+            <img src="/images/quora_new.svg" alt="quora" />
+          </div>
+        </a>
         <button
           class="navbar-toggler"
           id="navbar-toggler"

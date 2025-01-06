@@ -4,17 +4,17 @@ var methodOverride = require("method-override");
 const port = 3000;
 const { v4: uuidv4, parse, stringify } = require("uuid");
 const path = require("node:path");
+const ExpressError = require("./utils/ExpressError");
+const wrapAsync = require("./utils/wrapAsync");
+
 app.use(methodOverride("_method"));
+
 // app.use("/static", express.static("public"));
 
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
-
-app.listen(port, () => {
-  console.log(`Port Started ${port}`);
-});
 
 async function getRandomUser() {
   try {
@@ -131,84 +131,121 @@ Be aware of your body language and tone of voice.`,
   },
 ];
 
-app.get("/posts/new", (req, res) => {
-  res.render("new.ejs");
-});
+app.get(
+  "/posts/new",
+  wrapAsync((req, res) => {
+    res.render("new.ejs");
+  })
+);
 
 // Modified post creation
-app.post("/posts", async (req, res) => {
-  try {
-    const user = await getRandomUser();
-    const id = uuidv4();
-    console.log(req.body);
-    const { naam, question, description } = req.body;
+app.post(
+  "/posts",
+  wrapAsync(async (req, res) => {
+    try {
+      const user = await getRandomUser();
+      const id = uuidv4();
+      console.log(req.body);
+      const { naam, question, description } = req.body;
 
-    posts.push({
-      id,
-      username: user ? user.name.first + " " + user.name.last : "Anonymous",
+      posts.push({
+        id,
+        username: user ? user.name.first + " " + user.name.last : "Anonymous",
 
-      userImage: user ? user.picture.thumbnail : "/images/profile.png",
-      gender: user.gender,
-      streetNumber: user.location.street.number,
-      streetName: user.location.street.name,
-      city: user.location.city,
-      state: user.location.state,
-      country: user.location.country,
-      email: user.email,
-      dob: user.dob.date,
-      phone: user.phone,
-      ques: question,
-      description,
-      createdAt: new Date(),
-    });
+        userImage: user ? user.picture.thumbnail : "/images/profile.png",
+        gender: user.gender,
+        streetNumber: user.location.street.number,
+        streetName: user.location.street.name,
+        city: user.location.city,
+        state: user.location.state,
+        country: user.location.country,
+        email: user.email,
+        dob: user.dob.date,
+        phone: user.phone,
+        ques: question,
+        description,
+        createdAt: new Date(),
+      });
+      res.redirect("/posts");
+    } catch (error) {
+      console.error("Error creating post:", error);
+      res.status(500).send("Error creating post");
+    }
+  })
+);
+app.get(
+  "/posts",
+  wrapAsync((req, res) => {
+    const formattedPosts = posts.map((post) => ({
+      ...post,
+      createdAt: formatDate(post.createdAt),
+    }));
+    res.render("index.ejs", { posts: formattedPosts });
+  })
+);
+
+app.get(
+  "/posts/:id",
+  wrapAsync((req, res) => {
+    let { id } = req.params;
+    id = id.toString();
+
+    let post = posts.find((p) => id === p.id);
+    console.log(post.createdAt);
+    res.render("viewPost.ejs", { post });
+  })
+);
+
+app.get(
+  "/posts/:id/user",
+  wrapAsync((req, res) => {
+    let { id } = req.params;
+    id = id.toString();
+    let post = posts.find((p) => id === p.id);
+    res.render("viewUser.ejs", { post });
+  })
+);
+
+app.get(
+  "/posts/:id/edit",
+  wrapAsync((req, res) => {
+    let { id } = req.params;
+    let post = posts.find((p) => id === p.id);
+    res.render("edit.ejs", { post });
+  })
+);
+
+app.patch(
+  "/posts/:id",
+  wrapAsync((req, res) => {
+    let { id } = req.params;
+    let post = posts.find((p) => id === p.id);
+    let newDesciption = req.body.content;
+    post.description = newDesciption;
+    console.log(newDesciption);
+    console.log(post);
     res.redirect("/posts");
-  } catch (error) {
-    console.error("Error creating post:", error);
-    res.status(500).send("Error creating post");
-  }
-});
-app.get("/posts", (req, res) => {
-  const formattedPosts = posts.map((post) => ({
-    ...post,
-    createdAt: formatDate(post.createdAt),
-  }));
-  res.render("index.ejs", { posts: formattedPosts });
-});
+  })
+);
 
-app.get("/posts/:id", (req, res) => {
-  let { id } = req.params;
-  id = id.toString();
+app.delete(
+  "/posts/:id",
+  wrapAsync((req, res) => {
+    let { id } = req.params;
+    posts = posts.filter((p) => id !== p.id);
+    res.redirect("/posts");
+  })
+);
 
-  let post = posts.find((p) => id === p.id);
-  console.log(post.createdAt);
-  res.render("viewPost.ejs", { post });
+app.all("*", (req, res, next) => {
+  next(new ExpressError(404, "Page not found"));
 });
 
-app.get("/posts/:id/user", (req, res) => {
-  let { id } = req.params;
-  id = id.toString();
-  let post = posts.find((p) => id === p.id);
-  res.render("viewUser.ejs", { post });
+app.use((err, req, res, next) => {
+  let { statusCode = 500, message = "Something went wrong" } = err;
+  res.status(statusCode).render("error.ejs", { err }); //like res.status(statusCode).send(message);
 });
 
-app.get("/posts/:id/edit", (req, res) => {
-  let { id } = req.params;
-  let post = posts.find((p) => id === p.id);
-  res.render("edit.ejs", { post });
-});
-
-app.patch("/posts/:id", (req, res) => {
-  let { id } = req.params;
-  let post = posts.find((p) => id === p.id);
-  let newDesciption = req.body.content;
-  post.description = newDesciption;
-  console.log(newDesciption);
-  console.log(post);
-  res.redirect("/posts");
-});
-
-app.delete("/posts/:id", (req, res) => {
-  let { id } = req.params;
-  posts = posts.filter((p) => id !== p.id);
-  res.redirect("/posts");
+app.listen(port, () => {
+  console.log(`Port Started ${port}`);
 });

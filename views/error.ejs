@@ -1,0 +1,28 @@
+<%- include("navbar.ejs") %>
+<style>
+  body {
+    background-color: #121212 !important;
+  }
+
+  .row > * {
+    flex-shrink: 0;
+    width: 70%;
+    max-width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
+    margin-top: var(--bs-gutter-y);
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-self: center; */
+    padding-left: 100px;
+    margin-left: 15rem;
+  }
+</style>
+<div class="row mt-1">
+  <div class="alert alert-danger col-8 offset-2" role="alert">
+    <h4 class="alert-heading"><%= err.message %></h4>
+  </div>
+  <img
+    src="https://cdn.pixabay.com/photo/2017/02/12/21/29/false-2061131_1280.png"
+  />
+</div>
